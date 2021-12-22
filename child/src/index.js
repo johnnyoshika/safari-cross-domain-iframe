@@ -2,10 +2,12 @@ import 'dotenv/config';
 import express from 'express';
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send(
-    'Hello from child',
-  );
+app.post('/login-get', (req, res) => {
+  res.redirect(`${process.env.PARENT_URL}/authorize-redirect-get`);
+});
+
+app.post('/login-post', (req, res) => {
+  res.redirect(`${process.env.PARENT_URL}/authorize-redirect-post`);
 });
 
 const PORT = process.env.PORT || 8000;
