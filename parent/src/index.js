@@ -6,11 +6,10 @@ app.use(cookieParser());
 
 const cookieValue = req =>
   `<p>Cookie value:
-    <strong>${
-      req.cookies['foo']
-        ? `<span style="color: green;">${req.cookies['foo']}</span>`
-        : '<span style="color: red;">undefined</span>'
-    }
+    <strong>
+      <span style="color: ${req.cookies['foo'] ? 'green' : 'red'};">
+        ${req.cookies['foo']}
+      </span>
     </strong>
   </p>`;
 
@@ -89,11 +88,16 @@ app.all('/authorize', (req, res) => {
   res.send(
     `<html>
       <body>
-        <p>I'm at
-        <span style="color:blue;">
-          ${req.protocol + '://' + req.get('host') + req.originalUrl}
-        </span>
-        inside an iframe</p>
+        <p style="color:blue;">
+          ${
+            req.method +
+            ' ' +
+            req.protocol +
+            '://' +
+            req.get('host') +
+            req.originalUrl
+          }
+        </p>
         ${cookieValue(req)}
       </body>
     </html>`,
