@@ -1,13 +1,15 @@
 import 'dotenv/config';
+import express from 'express';
+const app = express();
 
-const userCredentials = { firstname: 'Robin' };
-const userDetails = { nationality: 'German' };
+app.get('/', (req, res) => {
+  res.send(
+    'Hello from parent',
+  );
+});
 
-const user = {
-  ...userCredentials,
-  ...userDetails,
-};
+const PORT = process.env.PORT || 8000;
 
-console.log(user);
-
-console.log(process.env.SOME_ENV_VARIABLE);
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
